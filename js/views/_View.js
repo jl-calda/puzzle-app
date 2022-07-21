@@ -1,8 +1,6 @@
 export default class View {
-  _getElementById(id, settings = null) {
-    const el = document.getElementById(id);
-    //debug
-    console.log(el);
+  _getElement(id, settings = null, root = null) {
+    const el = root ? root.querySelector(id) : document.querySelector(id);
     if (settings) {
       if (settings.classes) {
         settings.classes.forEach((className) => {
@@ -22,8 +20,31 @@ export default class View {
     }
     return el;
   }
-  _createElement(id, settings = null) {
-    const el = document.getElementById(id);
+
+  _getAllElements(id, settings = null, root = null) {
+    const el = root ? root.querySelectorAll(id) : document.querySelectorAll(id);
+    if (settings) {
+      if (settings.classes) {
+        settings.classes.forEach((className) => {
+          el.forEach((element) => element.classList.add(className));
+        });
+      }
+      if (settings.attributes) {
+        settings.attributes.forEach((pair) => {
+          const attribute = pair.attr;
+          const value = pair.value;
+          el.forEach((element) => element.setAttribute(attribute, value));
+        });
+      }
+      if (settings.text) {
+        el.forEach((element) => (element.textContent = settings.text));
+      }
+    }
+    return el;
+  }
+
+  _createElement(id, settings = null, root = null) {
+    const el = root ? root.querySelector(id) : document.querySelector(id);
     if (settings) {
       if (settings.classes) {
         settings.classes.forEach((className) => {

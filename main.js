@@ -1,20 +1,8 @@
-import Puzzle from './js/views/Puzzle.js';
+import PuzzleControl from "./js/controller/PuzzleControl.js";
 
-const app = new Puzzle('root');
-// import { PuzzleApi } from "./js/api/PuzzleApi.js";
-
-// const puzzle = await PuzzleApi.fetchImageURL(
-//   "https://picsum.photos/seed/picsum/200/300"
-// );
-// console.log("index", puzzle);
-// const img = document.getElementById("img");
-
-// // const source = URL.createObjectURL(puzzle);
-// img.src = puzzle;
-
-// let cols = 4;
-// let rows = 4;
-
+const app = new PuzzleControl("root");
+console.log(app);
+// const settings = new SettingsBoard();
 // function cutImageUp() {
 //   var imagePieces = [];
 //   for (var x = 0; x < cols; ++x) {
