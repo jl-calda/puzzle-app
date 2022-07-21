@@ -1,4 +1,4 @@
-class PuzzleApi {
+export default class PuzzleApi {
   static async fetchImageURL(url) {
     // const url = "https://picsum.photos/v2/list"; //returns 30 photos
     const response = await fetch(url);
@@ -7,5 +7,3 @@ class PuzzleApi {
     return source;
   }
 }
-
-export { PuzzleApi };
