@@ -1,16 +1,11 @@
-import PuzzleApi from "../api/PuzzleApi.js";
-import PuzzleView from "../views/PuzzleView.js";
+import PuzzleApi from '../api/PuzzleApi.js';
+import PuzzleView from '../views/PuzzleView.js';
 
 export default class PuzzleControl {
-  constructor(id) {
+  constructor(id, model) {
     this.root = document.getElementById(id);
-    this.model = new PuzzleApi();
-    this.views = new PuzzleView(this.model.gameSettings);
+    this.model = model;
+    this.views = new PuzzleView(model.gameSettings);
     this.root.append(this.views.elements.root);
   }
-
-  async getModel() {
-    const model = await new PuzzleApi();
-  }
-  init() {}
 }

@@ -1,8 +1,9 @@
-import View from "./_View.js";
+import View from './_View.js';
 
 export default class PiecesBoard extends View {
-  constructor() {
+  constructor(settings) {
     super();
+
     this.elements = {};
     this.elements.root = PiecesBoard.createRoot();
 
@@ -16,5 +17,17 @@ export default class PiecesBoard extends View {
     const fragment = range.createContextualFragment(el).children[0];
     // console.log(fragment);
     return fragment;
+  }
+
+  static createPiecesBoard() {
+    const piecesBox = this._createElement('div');
+    for (col = 0; col < 12; col++) {
+      let rowDiv = this._createElement('div', {
+        classes: ['flex'],
+        attributes: [],
+        text: null,
+      });
+      for (row = 0; row < 12; row++) {}
+    }
   }
 }

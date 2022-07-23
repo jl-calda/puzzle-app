@@ -13,29 +13,34 @@ export default class PuzzleApi {
       answer: null,
     };
     this._init();
-    this.difficulty = "normal";
+    this.difficulty = 'normal';
     this.settingObj = {
       easy: { columns: 3, rows: 3, numberPhoto: 1 },
-      normal: { columns: 4, rows: 4, numberPhoto: 2 },
+      normal: { columns: 4, rows: 4, numberPhoto: 1 },
       hard: { columns: 6, rows: 6, numberPhoto: 3 },
       omegahard: { columns: 10, rows: 10, numberPhoto: 5 },
     };
   }
 
   static async fetchImageURL() {
-    const url = "https://picsum.photos/v2/list";
+    // const url = '../../capsule_616x353.jpg';
+    const url = 'https://picsum.photos/v2/list';
     const response = await fetch(url);
     const data = await response.blob();
     const source = URL.createObjectURL(data);
     return source;
   }
 
-  _init() {
+  async _init() {
     const choicesURL = [];
     for (let i = 0; i < this.gameSettings.numberPhoto; i++) {
-      const url = PuzzleApi.fetchImageURL();
-      // console.log(url);
-      choicesURL.push(url);
+      // const url = await PuzzleApi.fetchImageURL();
+      const url = 'https://random.imagecdn.app/500/500';
+
+      const response = await fetch(url);
+      const data = await response.blob();
+      const source = URL.createObjectURL(data);
+      choicesURL.push(source);
     }
     this.gameSettings.choicesURL = choicesURL;
     this.gameSettings.puzzleURL = choicesURL[0];

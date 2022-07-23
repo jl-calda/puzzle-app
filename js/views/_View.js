@@ -43,8 +43,8 @@ export default class View {
     return el;
   }
 
-  _createElement(id, settings = null, root = null) {
-    const el = root ? root.querySelector(id) : document.querySelector(id);
+  _createElement(tag, settings = null) {
+    const el = document.createElement(tag);
     if (settings) {
       if (settings.classes) {
         settings.classes.forEach((className) => {

@@ -1,34 +1,13 @@
-import PuzzleControl from "./js/controller/PuzzleControl.js";
+import PuzzleControl from './js/controller/PuzzleControl.js';
+import PuzzleApi from './js/api/PuzzleApi.js';
+import PuzzleView from './js/views/PuzzleView.js';
 
-const app = new PuzzleControl("root");
-console.log(app);
-// const settings = new SettingsBoard();
-// function cutImageUp() {
-//   var imagePieces = [];
-//   for (var x = 0; x < cols; ++x) {
-//     for (var y = 0; y < rows; ++y) {
-//       var canvas = document.createElement("canvas");
-//       canvas.width = widthOfOnePiece;
-//       canvas.height = heightOfOnePiece;
-//       var context = canvas.getContext("2d");
-//       context.drawImage(
-//         image,
-//         x * widthOfOnePiece,
-//         y * heightOfOnePiece,
-//         widthOfOnePiece,
-//         heightOfOnePiece,
-//         0,
-//         0,
-//         canvas.width,
-//         canvas.height
-//       );
-//       imagePieces.push(canvas.toDataURL());
-//     }
-//   }
+async function renderApp() {
+  let model = new PuzzleApi();
+  await model._init();
+  console.log(model);
+  const app = new PuzzleControl('root', model);
+  return app;
+}
 
-//   // imagePieces now contains data urls of all the pieces of the image
-
-//   // load one piece onto the page
-//   var anImageElement = document.getElementById("myImageElementInTheDom");
-//   anImageElement.src = imagePieces[0];
-// }
+renderApp();

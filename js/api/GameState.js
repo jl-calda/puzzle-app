@@ -1,11 +1,21 @@
 export default class GameState {
-  static async fetchImageURL() {
-    const url = "https://random.imagecdn.app/500/500";
-    const response = await fetch(url);
-    const data = await response.blob();
-    const source = URL.createObjectURL(data);
-    return source;
+  constructor(settings) {
+    this.rows = null;
+    this.columns = 1;
+    this.numberPhoto = 1;
   }
+
+  init() {}
 }
 
 // const settings =
+// this.gameSettings = {
+//   width: 500,
+//   rows: 4,
+//   columns: 4,
+//   numberPhoto: 2,
+//   puzzleURL: null,
+//   choicesURL: null,
+//   shuffled: null,
+//   answer: null,
+// };
