@@ -1,13 +1,39 @@
-import PuzzleControl from './js/controller/PuzzleControl.js';
-import PuzzleApi from './js/api/PuzzleApi.js';
-import PuzzleView from './js/views/PuzzleView.js';
+import { GameState } from './js/api/GameState.js';
+import { GameStateBuilder } from './js/api/GameState.js';
 
-async function renderApp() {
-  let model = new PuzzleApi();
-  await model._init();
-  console.log(model);
-  const app = new PuzzleControl('root', model);
-  return app;
+const gameState = await GameStateBuilder.build('omegahard');
+// console.log(typeof gameState);
+// console.log(gameState);
+
+// function render() {
+const root = document.getElementById('root');
+root.classList.add(...['grid', 'grid-cols-6']);
+console.log(gameState);
+// for (let i = 0; i < gameState.choicesImgArr.length; i++) {
+//   const img = document.createElement('img');
+//   console.log(gameState.choicesImgArr[i]);
+//   img.src = gameState.choicesImgArr[i];
+//   root.append(img);
+//   console.log(root);
+//   console.log('append', i);
+// }
+console.log('rendering');
+for (let i = 0; i < gameState.unshuffledImgArr.length; i++) {
+  const img = document.createElement('img');
+  //   console.log(gameState.unshuffledImgArr[i]);
+  img.src = gameState.unshuffledImgArr[i];
+  root.append(img);
+  //   console.log(root);
+  //   console.log('append', i);
 }
+// }
 
-renderApp();
+// render();
+for (let i = 0; i < gameState.shuffledImgArr.length; i++) {
+  const img = document.createElement('img');
+  //   console.log(gameState.unshuffledImgArr[i]);
+  img.src = gameState.shuffledImgArr[i];
+  root.append(img);
+  //   console.log(root);
+  //   console.log('append', i);
+}

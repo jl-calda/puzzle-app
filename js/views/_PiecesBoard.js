@@ -3,7 +3,8 @@ import View from './_View.js';
 export default class PiecesBoard extends View {
   constructor(settings) {
     super();
-
+    this.width = 1000;
+    this.height = 400;
     this.elements = {};
     this.elements.root = PiecesBoard.createRoot();
 

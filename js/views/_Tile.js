@@ -1,6 +1,9 @@
-export default class Tile {
+import View from './_View.js';
+
+export default class Tile extends View {
   static createTile(img, x, y, tileSize) {
     const img2 = new Image();
+    img2.classList.add(...['border-2', 'border-sky-200', 'pointer']);
     img2.draggable = true;
     img2.dataset.id = x / tileSize;
     // img.src = imgURL;
@@ -18,21 +21,4 @@ export default class Tile {
     // };
     return img2;
   }
-}
-
-function getBase64FromImageUrl(URL) {
-  var img = new Image();
-  img.src = URL;
-  img.onload = function () {
-    var canvas = document.createElement('canvas');
-    canvas.width = this.width;
-    canvas.height = this.height;
-
-    var ctx = canvas.getContext('2d');
-    ctx.drawImage(this, 0, 0);
-
-    var dataURL = canvas.toDataURL('image/png').replace;
-
-    alert(dataURL.replace(/^data:image\/(png|jpg);base64,/, ''));
-  };
 }

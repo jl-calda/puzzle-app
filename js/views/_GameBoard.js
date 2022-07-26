@@ -33,23 +33,23 @@ export default class GameBoard extends View {
       attributes: null,
       text: null,
     });
-
     const img2 = new Image(this.width, this.height);
     img2.src = this.photoURL;
     div.append(img2);
     const tilesize = this.width / this.rows;
-    for (let y = 0; y < this.rows; y = y + 1) {
-      let els = [];
-      let rowDiv = this._createElement('div', {
-        classes: ['flex'],
-        attributes: [{ attr: 'row', value: y }],
-        text: null,
-      });
-      for (let x = 0; x < this.columns; x = x + 1) {
-        // console.log("this is run2");
-        const img = new Image();
-        img.src = this.photoURL;
-        img.onload = () => {
+    const answerArr = [];
+    const img = new Image();
+    img.src = this.photoURL;
+    img.onload = (e) => {
+      for (let y = 0; y < this.rows; y = y + 1) {
+        let els = [];
+        let rowDiv = this._createElement('div', {
+          classes: ['flex'],
+          attributes: [{ attr: 'row', value: y }],
+          text: null,
+        });
+        for (let x = 0; x < this.columns; x = x + 1) {
+          // console.log("this is run2");
           const tile = Tile.createTile(
             img,
             x * tilesize,
@@ -58,17 +58,11 @@ export default class GameBoard extends View {
             this.width,
             this.height
           );
-
-          tile.onload = () => rowDiv.append(tile);
           rowDiv.append(tile);
-        };
-
-        // console.log(croppedImg);
+        }
+        div.append(rowDiv);
       }
-      div.append(rowDiv);
-    }
-    // console.log(board);
+    };
     this.elements.root.append(div);
-    console.log(this.elements.root);
   }
 }
