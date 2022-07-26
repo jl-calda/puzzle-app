@@ -10,14 +10,8 @@ export default class PuzzleView extends View {
     super();
     this.elements = {};
     this.elements.root = PuzzleView.createRoot();
-    this.gameBoard = new GameBoard(settings);
     this.piecesBoard = PuzzleView.bindMakePiecesBoard();
     this.settingsBoard = PuzzleView.bindMakeSettingsBoard();
-    this.elements.root.append(
-      this.gameBoard.elements.root,
-      this.piecesBoard,
-      this.settingsBoard
-    );
   }
 
   static createRoot() {
