@@ -1,6 +1,7 @@
 export default class View {
   _getElement(id, settings = null, root = null) {
     const el = root ? root.querySelector(id) : document.querySelector(id);
+    // console.log(el);
     if (settings) {
       if (settings.classes) {
         settings.classes.forEach((className) => {
