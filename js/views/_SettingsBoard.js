@@ -20,7 +20,6 @@ export default class SettingsBoard extends View {
       null,
       this.elements.root
     );
-    console.log("debug", this.elements.settings);
     this.elements.settings.forEach((radio) => {
       radio.addEventListener("change", (e) => {
         this.changeSettings(e.target.value);
