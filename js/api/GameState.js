@@ -2,6 +2,8 @@ export class GameState {
   constructor(
     rows,
     columns,
+    pcRows,
+    pcColumns,
     tileHeight,
     tileWidth,
     choicesQty,
@@ -12,6 +14,8 @@ export class GameState {
   ) {
     this.rows = rows;
     this.columns = columns;
+    this.pcRows = pcRows;
+    this.pcColumns = pcColumns;
     this.tileHeight = tileHeight;
     this.tileWidth = tileWidth;
     this.choicesQty = choicesQty;

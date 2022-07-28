@@ -1,12 +1,18 @@
-import { GameState } from './GameState.js';
+import { GameState } from "./GameState.js";
 
 export class GameStateBuilder {
   static difficulties() {
     const difficulties = {
-      easy: { columns: 3, rows: 3, choicesQty: 1 },
-      normal: { columns: 4, rows: 4, choicesQty: 2 },
-      hard: { columns: 5, rows: 5, choicesQty: 2 },
-      omegahard: { columns: 6, rows: 6, choicesQty: 3 },
+      easy: { columns: 3, rows: 3, choicesQty: 1, pcColumns: 6, pcRows: 2 },
+      normal: { columns: 4, rows: 4, choicesQty: 2, pcColumns: 8, pcRows: 4 },
+      hard: { columns: 5, rows: 5, choicesQty: 2, pcColumns: 10, pcRows: 5 },
+      omegahard: {
+        columns: 6,
+        rows: 6,
+        choicesQty: 3,
+        pcColumns: 12,
+        pcRows: 9,
+      },
     };
     return difficulties;
   }
@@ -49,7 +55,7 @@ export class GameStateBuilder {
   }
 
   static async getImageURL() {
-    const url = 'https://random.imagecdn.app/500/500';
+    const url = "https://random.imagecdn.app/500/500";
     const response = await fetch(url);
     const blob = await response.blob();
     const source = URL.createObjectURL(blob);
@@ -68,16 +74,15 @@ export class GameStateBuilder {
   ) {
     const croppedImg = new Image(boardWidth, boardHeight);
     croppedImg.src = imgURL;
-    const dataURLs = [];
     const imgsInfo = [];
     await croppedImg.decode();
-    const canvas = document.createElement('canvas');
-    const context = canvas.getContext('2d');
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d");
     canvas.width = tileWidth;
     canvas.height = tileHeight;
     for (let y = 0; y < columns; y++) {
       for (let x = 0; x < rows; x++) {
-        const tileImg = context.drawImage(
+        context.drawImage(
           croppedImg,
           x * tileWidth,
           y * tileHeight,
@@ -89,28 +94,26 @@ export class GameStateBuilder {
           tileWidth,
           i
         );
-        // context.strokeText()
-        context.strokeText(`${x},${y}`, tileHeight / 2, tileWidth / 2);
-        // console.log(y, x);
         const dataURL = canvas.toDataURL();
         const imgInfo = {
           src: dataURL,
           id: `${dataURL.slice(0, 5)}${y}${x}${i}`,
         };
         imgsInfo.push(imgInfo);
-        // console.log(dataURL.slice(1, 120));
       }
     }
 
     return imgsInfo;
   }
 
-  static async build(difficulty = 'normal') {
+  static async build(difficulty = "normal") {
     const difficulties = GameStateBuilder.difficulties();
     const boardWidth = GameStateBuilder.puzzleDimension().width;
     const boardHeight = GameStateBuilder.puzzleDimension().height;
     const rows = difficulties[difficulty].rows;
     const columns = difficulties[difficulty].columns;
+    const pcRows = difficulties[difficulty].pcRows;
+    const pcColumns = difficulties[difficulty].pcColumns;
     const totalTiles = rows * columns;
     const choicesQty = difficulties[difficulty].choicesQty;
     const tileHeight = boardHeight / rows;
@@ -154,6 +157,8 @@ export class GameStateBuilder {
     return new GameState(
       rows,
       columns,
+      pcRows,
+      pcColumns,
       tileHeight,
       tileWidth,
       choicesQty,
